@@ -9,6 +9,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
 import styles from './episode.module.scss';
+import { usePlayer } from '../../contexts/PlayerContext';
 
 type Episode = {
     id:string;
@@ -27,6 +28,9 @@ type EpisodeProps = {
 }
 
 export default function Episode({episode}: EpisodeProps) {
+
+    const { play } = usePlayer();
+
     return(
       <div className={styles.episode}>
           <div className={styles.thumbnailContainer}>
@@ -37,7 +41,7 @@ export default function Episode({episode}: EpisodeProps) {
             </Link>
             <Image width={700} height={160} src={episode.thumbnail} objectFit="cover" />
             <button>
-               <img src="/play.svg" alt="Tocar episódio" />
+               <img src="/play.svg" alt="Tocar episódio" onClick={()=> play(episode)} />
             </button>
           </div>
 
